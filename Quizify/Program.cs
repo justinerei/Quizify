@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Channels;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Quizify
@@ -21,9 +23,11 @@ namespace Quizify
         {
 
             //Where user choose what are their going to do.
-            int choice; 
+            string userChoice;
+            int choice;
             do
             {
+                beginning:
                 Console.WriteLine("Welcome to Quizify!");
                 Console.WriteLine("1. Create a New Quiz");
                 Console.WriteLine("2. Add Questions to a Quiz");
@@ -32,30 +36,36 @@ namespace Quizify
                 Console.WriteLine("5. Update a Quiz");
                 Console.WriteLine("6. Remove a Quiz");
                 Console.WriteLine("7. Exit");
-                Console.Write("Enter your choice (1-5): ");
+                Console.Write("Enter your choice (1-7): ");
                 choice = Convert.ToInt32(Console.ReadLine());
+                
+                if(choice < 0 || choice > 7)
+                {
+                    Console.WriteLine("\nInvalid input!\n");
+                    goto beginning;
+                }
 
                 switch (choice)
-                {
-                    case 1:
-                        CreateQuiz();
-                        break;
-                    case 2:
-                        AddQuestions();
-                        break;
-                    case 3:
-                        DisplayQuizzes();
-                        break;
-                    case 4:
-                        TestQuiz();
-                        break;
-                    case 5:
-                        UpdateQuiz();
-                        break;
-                    case 6:
-                        RemoveQuiz();
-                        break;
-                }
+                    {
+                        case 1:
+                            CreateQuiz();
+                            break;
+                        case 2:
+                            AddQuestions();
+                            break;
+                        case 3:
+                            DisplayQuizzes();
+                            break;
+                        case 4:
+                            TestQuiz();
+                            break;
+                        case 5:
+                            UpdateQuiz();
+                            break;
+                        case 6:
+                            RemoveQuiz();
+                            break;
+                    }      
             }while(choice != 7);   
         }
 
@@ -149,7 +159,7 @@ namespace Quizify
                 Console.WriteLine("\nAll Quizzes: ");
                 for (int i = 0; i < quizTitles.Count; i++)
                 {
-                    Console.WriteLine($"\nQuiz {i + 1}: {quizTitles[i]}"); //Quiz 1: quizTitles
+                    Console.WriteLine($"Quiz {i + 1}: {quizTitles[i]}"); //Quiz 1: quizTitles
                     for (int j = 0; j < quizQuestions[i].Count; j++)
                     {
                         Console.WriteLine($" Question {j + 1}: {quizQuestions[i][j]}"); //Question 1: quizQuestions
@@ -179,14 +189,25 @@ namespace Quizify
                     Console.WriteLine($"{i + 1}. {quizTitles[i]}"); // 1. quizTitles
                 }
 
-                Console.Write("Select a quiz to test: ");
-                int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
 
-                if(quizIndex < 0 || quizIndex >= quizTitles.Count)
+                bool isValid = true;
+                int quizIndex;
+                do
                 {
-                    Console.WriteLine("Invalid input!\n");
-                    return;
-                }
+                    Console.Write("Select a quiz to test: ");
+                    quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                    if (quizIndex < 0 || quizIndex >= quizTitles.Count)
+                    {
+                        Console.WriteLine("\nInvalid input!\n");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
+                } while (!isValid);
+
 
                 Console.WriteLine($"\nTesting Quiz: {quizTitles[quizIndex]}"); //Testing Quiz: quizTitles of quizIndex
                 int correctCount = 0;
