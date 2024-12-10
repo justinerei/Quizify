@@ -184,7 +184,8 @@ namespace Quizify
 
                 if(quizIndex < 0 || quizIndex >= quizTitles.Count)
                 {
-                    Console.WriteLine("Invalid input!");
+                    Console.WriteLine("Invalid input!\n");
+                    return;
                 }
 
                 Console.WriteLine($"\nTesting Quiz: {quizTitles[quizIndex]}"); //Testing Quiz: quizTitles of quizIndex
@@ -329,7 +330,7 @@ namespace Quizify
                
                 if (quizIndex < 0 || quizIndex > quizTitles.Count)
                 {
-                    Console.WriteLine("Invalid Choice!");
+                    Console.WriteLine("Invalid Choice!\n");
                     return;
                 }
 
