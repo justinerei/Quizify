@@ -188,26 +188,16 @@ namespace Quizify
                 {
                     Console.WriteLine($"{i + 1}. {quizTitles[i]}"); // 1. quizTitles
                 }
-
-
-                bool isValid = true;
-                int quizIndex;
-                do
-                {
+                    
+                invalid4:                
                     Console.Write("Select a quiz to test: ");
-                    quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+                    int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
 
                     if (quizIndex < 0 || quizIndex >= quizTitles.Count)
                     {
                         Console.WriteLine("\nInvalid input!\n");
-                        isValid = false;
+                        goto invalid4;
                     }
-                    else
-                    {
-                        isValid = true;
-                    }
-                } while (!isValid);
-
 
                 Console.WriteLine($"\nTesting Quiz: {quizTitles[quizIndex]}"); //Testing Quiz: quizTitles of quizIndex
                 int correctCount = 0;
@@ -253,13 +243,14 @@ namespace Quizify
                 Console.WriteLine($"Quiz {i + 1}. {quizTitles[i]}");
             }
 
+            invalid5: 
             Console.Write("Enter the number of the quiz to update: ");
             int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
 
             if (quizIndex < 0 || quizIndex >= quizTitles.Count)
             {
-                Console.WriteLine("Invalid Choice!");
-                return;
+                Console.WriteLine("\nInvalid Choice!\n");
+                goto invalid5;
             }
 
             Console.WriteLine("What would you like to update?");
@@ -346,13 +337,14 @@ namespace Quizify
                     Console.WriteLine($"Quiz {i + 1}. {quizTitles[i]}");
                 }
 
+                invalid6:
                 Console.Write("Enter the number of the quiz to delete: ");
                 int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
                
                 if (quizIndex < 0 || quizIndex > quizTitles.Count)
                 {
-                    Console.WriteLine("Invalid Choice!\n");
-                    return;
+                    Console.WriteLine("\nInvalid Choice!\n");
+                    goto invalid6;
                 }
 
                 Console.Write($"\nAre you sure you want to delete {quizTitles[quizIndex]} (yes/no)? ");
