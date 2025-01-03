@@ -64,7 +64,7 @@ namespace Quizify
                             break;
                         case 6:
                             RemoveQuiz() ;
-                            break;
+                            break ;
                     }      
             }while(choice != 7);   
         }
@@ -74,9 +74,9 @@ namespace Quizify
         {
             Console.WriteLine("\nCreating a Quiz");
             Console.Write("Enter a title for the new quiz: ");
-            string quizTitle = Console.ReadLine();
+            string title = Console.ReadLine();
 
-            if (quizTitle == "")
+            if (title == "")
             {
                 Console.WriteLine("Cannot be empty! Please input some title.");
                 return ;
@@ -102,22 +102,22 @@ namespace Quizify
             }
             else
             {
-                Console.WriteLine("\nAvailable Quizzez:");
-                for (int i = 0; i < quizTitles.Count; i++) //To see all the available quiz/zes
+                Console.WriteLine("\nAvailable Quizzez: ") ;
+                for (int i = 0; i < quizTitles.Count; i++) //to see all the available quiz/zes
                 {
-                    Console.WriteLine($"{i + 1}. {quizTitles[i]}"); //1. quizTitle
+                    Console.WriteLine($"{i + 1}. { quizTitles[i]}"); //1 . quizTitle 
                 }
 
                 Console.Write("Select a quiz to add questions (number): ");
-                int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1; //Becasue index starts at 0
+                int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1; //becasue index starts at 0
 
                 if(quizIndex < 0 || quizIndex >= quizTitles.Count)
                 {
-                    Console.WriteLine("Invalid input!");
+                    Console.WriteLine("Invalid  input!");
                     return;
                 }
 
-                Console.Write("How many questions would you like to add: ");
+                Console.Write("How many questions  would you like to add: ");
                 int questionsCount = Convert.ToInt32(Console.ReadLine());
 
                 for (int i = 0; i < questionsCount; i++)
@@ -125,10 +125,10 @@ namespace Quizify
                     Console.Write($"Enter the question {i + 1}: ") ;
                     string question = Console.ReadLine() ;
 
-                    Console.Write("Enter the number of options: ");
+                    Console.Write("Enter the number of options: ") ;
                     int numOptions = Convert.ToInt32(Console.ReadLine());
 
-                    List<string> options = new List<string>(); //array for options
+                    List<string>  options = new List<string>() ; //array for options
                     for (int j = 0; j < numOptions; j++)
                     {
                         Console.Write($"Enter option {j + 1}: ");
@@ -138,11 +138,11 @@ namespace Quizify
                     Console.Write("Enter the correct answer (number): ");
                     int corrAnswer = Convert.ToInt32(Console.ReadLine()) - 1;
 
-                    quizQuestions[quizIndex].Add(question); //Setting the question to the quizIndex of quizQuesitons
-                    quizOptions[quizIndex].Add(options); //Setting the options to the quizIndex of quizOptions
-                    corrAnswers[quizIndex].Add(corrAnswer); //Setting the corrAnswer to the quizIndex of corrAnswers
+                    quizQuestions[quizIndex].Add(question) ; //setting the question to the quizIndex of quizQuesitons
+                    quizOptions[quizIndex].Add(options) ; //setting the options to the quizIndex of quizOptions
+                    corrAnswers[quizIndex].Add(corrAnswer); //setting the corrAnswer to the quizIndex of corrAnswers
 
-                    Console.WriteLine("Question added Successfully!\n");
+                    Console.WriteLine("Question added Successfully!\n") ;
                 }
             }
         }
@@ -150,26 +150,26 @@ namespace Quizify
         //to display all the available  quizzes
         static void DisplayQuizzes()
         {
-            if (quizTitles.Count == 0)
+            if(quizTitles.Count == 0)
             {
-                Console.WriteLine("\nNo quizzes available.\n");
+                Console.WriteLine("\nNo quizzes available.\n") ;
             }
             else
             {
                 Console.WriteLine("\nAll Quizzes: ");
                 for (int i = 0; i < quizTitles.Count; i++)
                 {
-                    Console.WriteLine($"Quiz {i + 1}: {quizTitles[i]}"); //Quiz 1: quizTitles
-                    for (int j = 0; j < quizQuestions[i].Count; j++)
+                    Console.WriteLine($"Quiz {i + 1} : {quizTitles[i]}"); //Quiz 1: quizTitles
+                    for  (int j = 0; j < quizQuestions[i].Count; j++)
                     {
                         Console.WriteLine($" Question {j + 1}: {quizQuestions[i][j]}") ; //Question 1: quizQuestions
-                        for (int k = 0; k < quizOptions[i][j].Count; k++)
+                        for(int k = 0; k < quizOptions[i][j].Count; k++)
                         {
                             Console.WriteLine($"    Option {k + 1}. {quizOptions[i][j][k]}") ; //Option 1: quizOptions
                         }
                     }
 
-                    Console.WriteLine();
+                    Console.WriteLine() ;
                 }
             }
         }
@@ -205,7 +205,7 @@ namespace Quizify
 
                 for (int i = 0; i < quizQuestions[quizIndex].Count; i++)
                 {
-                    Console.WriteLine($"\nQuestion {i + 1}: {quizQuestions[quizIndex][i]}") ;
+                    Console.WriteLine($"\nQuestion {i + 1}: {quizQuestions[quizIndex][i]}") ; // showing the quizzes and questiosn
                     for (int j = 0; j < quizOptions[quizIndex][i].Count; j++)
                     {
                         Console.WriteLine($"  Choice {j + 1}. {quizOptions[quizIndex][i][j]}");
@@ -214,7 +214,7 @@ namespace Quizify
                     Console.Write("Enter your answer: ");
                     int userAnswer = int.Parse(Console.ReadLine()) - 1;
 
-                    if (userAnswer == corrAnswers[quizIndex][i])
+                    if (userAnswer == corrAnswers[quizIndex][i]) //correct counter and handler
                     {
                         Console.WriteLine("Correct!");
                         corrCount++ ;
@@ -229,16 +229,16 @@ namespace Quizify
             }
         }
 
-        //The user is updating the quiz 
+        //the user is updating the quiz 
         static void UpdateQuiz()
         {
             if (quizTitles.Count == 0)
             {
-                Console.WriteLine("\nNo quizzes available to update.\n");
+                Console.WriteLine ("\nNo quizzes available to update.\n");
                 return;
             }
 
-            Console.WriteLine("\nQuizzes Available: ");
+            Console.WriteLine("\nQuizzes Available: ") ;
             for (int i = 0; i < quizTitles.Count; i++)
             {
                 Console.WriteLine($"Quiz {i + 1}. {quizTitles[i]}");
@@ -246,27 +246,27 @@ namespace Quizify
 
             invalid5: 
             Console.Write("Enter the number of the quiz to update: ");
-            int quizIndex = Convert.ToInt32(Console.ReadLine()) - 1;
+            int quizIndex  = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            if (quizIndex < 0 || quizIndex >= quizTitles.Count)
+            if(quizIndex < 0 || quizIndex >= quizTitles.Count)
             {
-                Console.WriteLine("\nInvalid Choice!\n");
+                Console.WriteLine("\nInvalid Choice! \n");
                 goto invalid5;
             }
 
             Console.WriteLine("What would you like to update?");
             Console.WriteLine("1. Quiz Title");
-            Console.WriteLine("2. Question and Answers");
+            Console.WriteLine("2. Question and Answers") ;
             Console.Write("Enter your choice: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            int choice = Convert.ToInt32(Console.ReadLine()) ;
 
-            if (choice == 1) //the user chose option1
+            if(choice == 1) //the user chose option1
             {
                 Console.Write("\nEnter new title: ");
                 string newTitle = Console.ReadLine();
                 if (newTitle == "")
                 {
-                    Console.WriteLine("Title cannot be empty!");
+                    Console.WriteLine("Title cannot be empty!") ;
                     return;
                 }
                 quizTitles[quizIndex] = newTitle;
@@ -286,7 +286,7 @@ namespace Quizify
                         Console.WriteLine($"   {j + 1}: {quizOptions[quizIndex][i][j]}") ;
                     }
 
-                    // Update the question
+                    // update the questions
                     Console.Write("Enter a new question (or leave blank to keep): ");
                     string newQuestion = Console.ReadLine();
                     if (!string.IsNullOrWhiteSpace(newQuestion))
@@ -294,7 +294,7 @@ namespace Quizify
                         quizQuestions[quizIndex][i] = newQuestion ;
                     }
 
-                    // Update the options
+                    //update the  optiosn
                     for (int j = 0; j < quizOptions[quizIndex][i].Count; j++)
                     {
                         Console.Write($"Enter new option for Choice {j + 1} (or leave blank to keep): ");
@@ -305,7 +305,7 @@ namespace Quizify
                         }
                     }
 
-                    // Update the correct answer
+                    //update the correct answer
                     Console.Write("Enter the number of the correct option (or leave blank to keep): ");
                     int newCorrectAns = Convert.ToInt32(Console.ReadLine());
                     if (newCorrectAns >= 1)
@@ -322,7 +322,7 @@ namespace Quizify
             }
         }
 
-        //The user is deleting some quiz
+        //the user is deleting some quiz
         static void RemoveQuiz()
         {
             if (quizTitles.Count == 0)
