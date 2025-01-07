@@ -83,12 +83,12 @@ namespace Quizify
             }
             else
             {
-                quizTitles.Add(quizTitle); //adding the quizTitle to the array quizTitles.
+                quizTitles.Add(title); //adding the quizTitle to the array quizTitles.
                 quizQuestions.Add(new List<String>()); //setting the quizTitle for new the new index of quizQuestion.
                 quizOptions.Add(new List<List<String>>()); //Setting the quizTitle for new the new index of quizOption.
                 corrAnswers.Add(new List<int>()); //setting the quizTitle for new the new index of correctAnswers.
 
-                Console.WriteLine($"Quiz '{quizTitle}' created successfully!\n");
+                Console.WriteLine($"Quiz '{title}' created successfully!\n");
             }
         }
 
@@ -307,11 +307,17 @@ namespace Quizify
 
                     //update the correct answer
                     Console.Write("Enter the number of the correct option (or leave blank to keep): ");
-                    int newCorrectAns = Convert.ToInt32(Console.ReadLine());
-                    if (newCorrectAns >= 1)
+                    String input = Console.ReadLine();
+
+                    if(!string.IsNullOrWhiteSpace(input))
                     {
-                        corrAnswers[quizIndex][i] = newCorrectAns -  1;
+                        int newCorrectAns = Convert.ToInt32(input);
+                        if (newCorrectAns >= 1)
+                        {
+                            corrAnswers[quizIndex][i] = newCorrectAns - 1;
+                        }
                     }
+
                 }
 
                 Console.WriteLine("Questions and answers updated successfully!\n");
